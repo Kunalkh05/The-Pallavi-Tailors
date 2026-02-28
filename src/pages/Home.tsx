@@ -187,7 +187,7 @@ export function Home() {
                 {/* Layer 1: Background */}
                 <div className="absolute inset-0 z-0 parallax-layer">
                     <div
-                        className="h-full w-full bg-cover bg-center bg-no-repeat transform scale-110 animate-zoom-slow"
+                        className="h-full w-full bg-cover bg-center bg-no-repeat transform scale-125 animate-pan-image"
                         style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBZROWhlLDRSvQd0-DACZRmMDMXZ_hIw_ByYg_PtLUWBPbk5WwVtG6TQZ5SibXUKTKCIe-vCPK8nDDbP5NeFIf-Civ2rKt3jOnXJ1fyLcn9fIhcE0R-JVX_hap6uJQus3w785FmEceONKPsvyvl46aztDC6CDqgEAE1L57sWHQXU-r5WOoA5LnHXmi6MKxsgQYCOhKEBih96BpW1KIHKWtCkhUDEEZU3BuUTFlg1BKW4AWtfg1VIwphCepwqpREax4PSFge8b5u9Y')" }}
                     />
                     {/* Cinematic color overlays */}
@@ -211,7 +211,7 @@ export function Home() {
 
                         {/* Main Heading */}
                         <h1 className="mb-6 font-display text-6xl font-medium tracking-tight md:text-7xl lg:text-9xl opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-                            <span className="text-gradient-rosegold drop-shadow-sm">The Pallavi</span>
+                            <span className="bg-gradient-to-r from-primary via-white to-primary bg-[length:200%_auto] text-transparent bg-clip-text animate-text-shimmer drop-shadow-sm">The Pallavi</span>
                             <br />
                             <span className="text-white/90">Tailors</span>
                         </h1>
@@ -226,10 +226,13 @@ export function Home() {
 
                         {/* CTAs */}
                         <div className="flex flex-col gap-4 sm:flex-row opacity-0 animate-fade-in-up" style={{ animationDelay: '0.9s', animationFillMode: 'forwards' }}>
-                            <Link to="/register" className="btn-primary group text-lg">
-                                <span>Book Your Stitching</span>
-                                <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
-                            </Link>
+                            <div className="relative group">
+                                <div className="absolute -inset-1 bg-primary rounded-full blur-md opacity-0 group-hover:opacity-40 animate-pulse-ring transition-opacity duration-500"></div>
+                                <Link to="/register" className="btn-primary relative text-lg whitespace-nowrap">
+                                    <span>Book Your Stitching</span>
+                                    <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                                </Link>
+                            </div>
                             <a href="#gallery" className="btn-outline">
                                 <span>Explore Designs</span>
                             </a>
@@ -253,7 +256,7 @@ export function Home() {
                             { icon: 'diamond', title: 'Premium Materials', text: 'Sourced from the finest mills to provide luxury you can feel.' },
                             { icon: 'local_shipping', title: 'Timely Delivery', text: 'Respecting your time with punctual service for every occasion.' },
                         ].map((f, i) => (
-                            <div key={i} className="stagger-child scroll-reveal glass-card p-8 group" style={{ transitionDelay: `${i * 150}ms` }}>
+                            <div key={i} className="stagger-child scroll-reveal glass-card p-8 group animate-gentle-tilt" style={{ transitionDelay: `${i * 150}ms`, animationDelay: `${i * 2}s` }}>
                                 <div className="mb-5 inline-flex size-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-primary/20 group-hover:shadow-lg group-hover:shadow-primary/10">
                                     <span className="material-symbols-outlined text-2xl">{f.icon}</span>
                                 </div>

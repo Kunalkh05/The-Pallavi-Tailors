@@ -89,6 +89,23 @@ export default {
           '0%, 100%': { transform: 'perspective(800px) rotateX(0deg) rotateY(0deg)' },
           '50%': { transform: 'perspective(800px) rotateX(1deg) rotateY(-1deg)' },
         },
+        'text-shimmer': {
+          '0%': { backgroundPosition: '200% center' },
+          '100%': { backgroundPosition: '-200% center' },
+        },
+        'pulse-ring': {
+          '0%': { transform: 'scale(0.8)', opacity: '0.8' },
+          '100%': { transform: 'scale(1.5)', opacity: '0' },
+        },
+        'pan-image': {
+          '0%': { objectPosition: '0% 50%' },
+          '50%': { objectPosition: '100% 50%' },
+          '100%': { objectPosition: '0% 50%' },
+        },
+        'gentle-tilt': {
+          '0%, 100%': { transform: 'rotate(-1deg)' },
+          '50%': { transform: 'rotate(1deg)' },
+        }
       },
       animation: {
         'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.22,1,0.36,1) forwards',
@@ -104,6 +121,10 @@ export default {
         'fabric-wave': 'fabric-wave 8s ease-in-out infinite',
         'petal-fall': 'petal-fall 12s linear infinite',
         'depth-breathe': 'depth-breathe 10s ease-in-out infinite',
+        'text-shimmer': 'text-shimmer 8s linear infinite',
+        'pulse-ring': 'pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite',
+        'pan-image': 'pan-image 40s ease-in-out infinite',
+        'gentle-tilt': 'gentle-tilt 6s ease-in-out infinite alternate',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
