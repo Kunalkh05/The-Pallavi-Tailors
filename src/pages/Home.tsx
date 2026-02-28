@@ -169,6 +169,7 @@ export function Home() {
     const featuresRef = useStaggerReveal(3, 150);
     const servicesRef = useStaggerReveal(4, 120);
     const galleryRef = useStaggerReveal(4, 100);
+    const stepsRef = useStaggerReveal(3, 200);
     const aboutImageRef = useScrollReveal(0.2);
     const aboutTextRef = useScrollReveal(0.2);
     const timelineRef = useScrollReveal(0.1);
@@ -292,6 +293,79 @@ export function Home() {
                 </div>
             </section>
 
+            {/* ═══════════════════ MEASUREMENT EXPERIENCE — LAYERED DEPTH ═══════════════════ */}
+            <section className="section-padding bg-surface-light text-slate-900 relative overflow-hidden cv-auto">
+                {/* Background decoration */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-0 left-0 w-80 h-80 bg-blush/10 rounded-full blur-[100px]"></div>
+
+                <div className="mx-auto max-w-7xl relative z-10">
+                    <div className="flex flex-col lg:flex-row items-center gap-16">
+                        <div ref={aboutTextRef} className="scroll-reveal w-full lg:w-1/2 space-y-8">
+                            <p className="text-primary-dark uppercase tracking-[0.3em] text-xs font-semibold">The Experience</p>
+                            <h2 className="text-4xl md:text-5xl font-display font-medium text-slate-900">Precision in Every Detail</h2>
+                            <p className="text-slate-600 text-lg leading-relaxed">Experience our premium, guided measurement process. Designed to be effortless and extremely precise, ensuring your garment is tailored to perfection.</p>
+
+                            <div ref={stepsRef} className="space-y-4">
+                                {[
+                                    { step: '01', title: 'Guided Visual Form', text: 'Clear illustrations showing exactly where to measure.', icon: 'straighten' },
+                                    { step: '02', title: 'Secure Digital Profile', text: 'Save your measurements securely for all future orders.', icon: 'lock' },
+                                    { step: '03', title: 'Expert Tailor Review', text: 'Our master tailors review your profile before processing.', icon: 'verified' },
+                                ].map((item, idx) => (
+                                    <div key={idx} className="stagger-child scroll-reveal flex gap-5 items-start group p-5 rounded-2xl hover:bg-primary/5 transition-all duration-300" style={{ transitionDelay: `${idx * 200}ms` }}>
+                                        <div className="inline-flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary-dark">
+                                            <span className="material-symbols-outlined">{item.icon}</span>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-lg font-bold text-slate-900 group-hover:text-primary-dark transition-colors">{item.title}</h4>
+                                            <p className="text-slate-500 text-sm mt-1">{item.text}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <Link to="/register" className="btn-primary !bg-surface !text-primary !shadow-surface/20">
+                                Create Your Profile
+                                <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                            </Link>
+                        </div>
+
+                        {/* Interactive UI Mockup — Floating in 3D space */}
+                        <div className="w-full lg:w-1/2 relative perspective-container">
+                            <div className="animate-float-slow">
+                                <div className="bg-white p-8 rounded-3xl border border-slate-200/50 shadow-2xl shadow-primary/5 relative z-10">
+                                    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                                        <div className="inline-flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary-dark">
+                                            <span className="material-symbols-outlined text-lg">straighten</span>
+                                        </div>
+                                        <h3 className="text-lg font-display font-bold text-slate-900">Bust Measurement</h3>
+                                        <span className="ml-auto text-xs bg-primary/10 text-primary-dark font-bold px-3 py-1.5 rounded-full">Step 2 of 6</span>
+                                    </div>
+                                    <div className="flex justify-center mb-8">
+                                        <div className="w-48 h-56 rounded-2xl bg-gradient-to-b from-blush/20 to-slate-50 border border-slate-200 relative flex items-center justify-center">
+                                            <svg viewBox="0 0 100 200" className="w-24 h-40 text-muted-rose/30" fill="currentColor">
+                                                <path d="M30 40 Q50 20 70 40 Q80 80 70 120 Q50 160 30 120 Q20 80 30 40 Z" />
+                                            </svg>
+                                            <div className="absolute top-1/3 left-0 right-0 h-0.5 bg-primary flex items-center justify-center">
+                                                <div className="bg-primary text-white text-[9px] font-bold px-2.5 py-1 rounded-full shadow-lg shadow-primary/20">BUST</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-4">
+                                        <div>
+                                            <label className="block text-xs uppercase tracking-widest text-slate-400 mb-2 font-semibold">Measurement (Inches)</label>
+                                            <input type="text" value="34.5" readOnly className="w-full border border-slate-200 rounded-xl py-3 px-4 text-2xl font-display bg-slate-50 focus:outline-none focus:border-primary" />
+                                        </div>
+                                        <button className="w-full btn-primary !rounded-xl !py-3.5 !text-sm">Save & Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Depth shadow */}
+                            <div className="absolute -bottom-4 left-8 right-8 h-16 bg-primary/5 rounded-[2rem] blur-2xl"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             {/* ═══════════════════ GALLERY — DEPTH LAYERS ═══════════════════ */}
             <section id="gallery" className="section-padding bg-surface cv-auto">
