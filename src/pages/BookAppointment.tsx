@@ -1,6 +1,6 @@
 // Book Appointment Page - The Pallavi Tailors
 import { useState, FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { useToast } from '../components/ui/Toast';
@@ -18,8 +18,10 @@ export function BookAppointment() {
     const { profile } = useAuth();
     const { toast } = useToast();
     const navigate = useNavigate();
+    const location = useLocation();
+
     const [form, setForm] = useState({
-        service_type: '',
+        service_type: location.state?.service_type || '',
         preferred_date: '',
         message: '',
     });
@@ -98,8 +100,8 @@ export function BookAppointment() {
                                         type="button"
                                         onClick={() => setForm(p => ({ ...p, service_type: service.value }))}
                                         className={`text-left p-4 rounded-xl border transition-all duration-300 group ${form.service_type === service.value
-                                                ? 'border-primary bg-primary/10 shadow-lg shadow-primary/10'
-                                                : 'border-white/10 bg-surface hover:border-white/20'
+                                            ? 'border-primary bg-primary/10 shadow-lg shadow-primary/10'
+                                            : 'border-white/10 bg-surface hover:border-white/20'
                                             }`}
                                     >
                                         <div className="flex items-center gap-3 mb-2">

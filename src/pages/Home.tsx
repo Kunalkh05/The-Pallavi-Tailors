@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useScrollReveal, useStaggerReveal, useTilt, useCountUp } from '../hooks/useScrollAnimation';
 import { supabase } from '../lib/supabase';
 import { useToast } from '../components/ui/Toast';
@@ -166,6 +166,8 @@ function ContactSection() {
 }
 
 export function Home() {
+    const navigate = useNavigate();
+    const [selectedService, setSelectedService] = useState<any>(null);
     const featuresRef = useStaggerReveal(3, 150);
     const servicesRef = useStaggerReveal(4, 120);
     const galleryRef = useStaggerReveal(4, 100);
@@ -270,12 +272,17 @@ export function Home() {
 
                     <div ref={servicesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
-                            { title: 'Bridal Blouse Stitching', icon: 'styler', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC-T8-Sn9YCMwGEJABP52d2pNp8W0Rfe_x3clCqSXQqxjqn4pjF2WQYknBcf2FoAYsPU0OdNcvChb9K9lhxGKTjSJpO7bvqGAe7mDq3jwsCFfQMX7H2KQr-HxiAAKQ6_0qgxrNAkm1cPQNkFpRlcPZbJvyLsHuXPnF7M95U_gIDpCr0SvX-bKU1h-_tTiSqhfxPwMJgQjLMoFhO9iXvfGGCWNjfGRaUlpT6FNyGT0K36apwZkPcfTDq6W5rVmhb_WF6Nx' },
-                            { title: 'Designer Kurti', icon: 'checkroom', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBVjH_cJ14fWuW0N27bpWHXzWn3F5H11h2GvZRBVLuatbMpKz4J-9QBVfZlzijKFNYi3RMBw_8SkKqzN5J2JBh3Xr3Jh3qS0EXBA_1xUQjqYFfCqJEVlhZA_Y_QGVzG_cF1q3RHaKEFOPhAspHe_kp7-pu_0ZK4R' },
-                            { title: 'Saree Customization', icon: 'auto_awesome', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBZROWhlLDRSvQd0-DACZRmMDMXZ_hIw_ByYg_PtLUWBPbk5WwVtG6TQZ5SibXUKTKCIe-vCPK8nDDbP5NeFIf-Civ2rKt3jOnXJ1fyLcn9fIhcE0R-JVX_hap6uJQus3w785FmEceONKPsvyvl46aztDC6CDqgEAE1L57sWHQXU-r5WOoA5LnHXmi6MKxsgQYCOhKEBih96BpW1KIHKWtCkhUDEEZU3BuUTFlg1BKW4AWtfg1VIwphCepwqpREax4PSFge8b5u9Y' },
-                            { title: 'Alterations & Fittings', icon: 'content_cut', img: 'https://images.unsplash.com/photo-1574360773950-8b1b1aa80cdd?auto=format&fit=crop&q=80&w=800' },
+                            { title: 'Bridal Blouse Stitching', icon: 'styler', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC-T8-Sn9YCMwGEJABP52d2pNp8W0Rfe_x3clCqSXQqxjqn4pjF2WQYknBcf2FoAYsPU0OdNcvChb9K9lhxGKTjSJpO7bvqGAe7mDq3jwsCFfQMX7H2KQr-HxiAAKQ6_0qgxrNAkm1cPQNkFpRlcPZbJvyLsHuXPnF7M95U_gIDpCr0SvX-bKU1h-_tTiSqhfxPwMJgQjLMoFhO9iXvfGGCWNjfGRaUlpT6FNyGT0K36apwZkPcfTDq6W5rVmhb_WF6Nx', price: 'Starts at ₹4,999', desc: 'Custom bridal blouse with heavy hand-embroidery (maggam work), perfect fitting, and premium lining. Designed specifically for your big day.' },
+                            { title: 'Designer Kurti', icon: 'checkroom', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBVjH_cJ14fWuW0N27bpWHXzWn3F5H11h2GvZRBVLuatbMpKz4J-9QBVfZlzijKFNYi3RMBw_8SkKqzN5J2JBh3Xr3Jh3qS0EXBA_1xUQjqYFfCqJEVlhZA_Y_QGVzG_cF1q3RHaKEFOPhAspHe_kp7-pu_0ZK4R', price: 'Starts at ₹1,499', desc: 'Tailored designer kurti in your preferred style (A-line, Anarkali, straight cut) with customized neck designs and expert finishing.' },
+                            { title: 'Saree Customization', icon: 'auto_awesome', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBZROWhlLDRSvQd0-DACZRmMDMXZ_hIw_ByYg_PtLUWBPbk5WwVtG6TQZ5SibXUKTKCIe-vCPK8nDDbP5NeFIf-Civ2rKt3jOnXJ1fyLcn9fIhcE0R-JVX_hap6uJQus3w785FmEceONKPsvyvl46aztDC6CDqgEAE1L57sWHQXU-r5WOoA5LnHXmi6MKxsgQYCOhKEBih96BpW1KIHKWtCkhUDEEZU3BuUTFlg1BKW4AWtfg1VIwphCepwqpREax4PSFge8b5u9Y', price: 'Starts at ₹2,499', desc: 'Complete saree styling including perfect drape fall and picot stitching, custom hand-made tassels, and a beautifully stitched matching blouse.' },
+                            { title: 'Alterations & Fittings', icon: 'content_cut', img: 'https://images.unsplash.com/photo-1574360773950-8b1b1aa80cdd?auto=format&fit=crop&q=80&w=800', price: 'Starts at ₹199', desc: 'Expert alterations for that perfect showroom fit on any ethnic wear, western wear, or precious heirloom garments.' },
                         ].map((service, idx) => (
-                            <div key={idx} className="stagger-child scroll-reveal group relative h-[420px] overflow-hidden rounded-2xl cursor-pointer" style={{ transitionDelay: `${idx * 120}ms` }}>
+                            <div
+                                key={idx}
+                                onClick={() => setSelectedService(service)}
+                                className="stagger-child scroll-reveal group relative h-[420px] overflow-hidden rounded-2xl cursor-pointer"
+                                style={{ transitionDelay: `${idx * 120}ms` }}
+                            >
                                 <img src={service.img} alt={service.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-[1s] ease-out" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-transparent"></div>
                                 <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -285,11 +292,79 @@ export function Home() {
                                         <span className="material-symbols-outlined text-xl">{service.icon}</span>
                                     </div>
                                     <h3 className="text-2xl font-display font-bold drop-shadow-md mb-1">{service.title}</h3>
-                                    <span className="inline-block mt-3 text-primary uppercase tracking-[0.2em] text-[10px] font-bold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">Discover More →</span>
+                                    <span className="inline-flex items-center gap-1 mt-3 text-primary uppercase tracking-[0.2em] text-[10px] font-bold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                        Discover More <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                    </span>
                                 </div>
                             </div>
                         ))}
                     </div>
+
+                    {/* Service Detail Modal */}
+                    {selectedService && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 animate-fade-in" style={{ animationFillMode: 'forwards' }} onClick={() => setSelectedService(null)}>
+                            {/* Backdrop */}
+                            <div className="absolute inset-0 bg-surface/80 backdrop-blur-md"></div>
+
+                            {/* Modal Content */}
+                            <div
+                                className="relative w-full max-w-lg bg-surface-light rounded-[2rem] overflow-hidden shadow-2xl shadow-primary/10 opacity-0 animate-fade-in-up md:animate-scale-in"
+                                style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
+                                onClick={e => e.stopPropagation()}
+                            >
+                                {/* Header Image */}
+                                <div className="h-48 sm:h-64 relative w-full">
+                                    <img src={selectedService.img} alt={selectedService.title} className="w-full h-full object-cover" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-surface-light via-surface-light/20 to-transparent"></div>
+
+                                    {/* Close Button */}
+                                    <button
+                                        onClick={() => setSelectedService(null)}
+                                        className="absolute top-4 right-4 size-10 flex items-center justify-center rounded-full bg-surface/40 text-white hover:bg-primary transition-all duration-300 backdrop-blur-md border border-white/10 shadow-lg"
+                                    >
+                                        <span className="material-symbols-outlined text-sm">close</span>
+                                    </button>
+                                </div>
+
+                                {/* Body */}
+                                <div className="p-6 sm:p-8 relative -mt-8 bg-surface-light rounded-t-[2rem]">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary-dark">
+                                            <span className="material-symbols-outlined">{selectedService.icon}</span>
+                                        </div>
+                                        <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">{selectedService.title}</h3>
+                                    </div>
+
+                                    <div className="inline-flex items-center gap-2 mb-6 bg-blush/20 text-primary-dark px-3 py-1.5 rounded-lg border border-primary/20">
+                                        <span className="material-symbols-outlined text-sm">sell</span>
+                                        <p className="font-bold text-sm tracking-wide">{selectedService.price}</p>
+                                    </div>
+
+                                    <div className="space-y-4 mb-8">
+                                        <p className="text-slate-600 text-base leading-relaxed">
+                                            {selectedService.desc}
+                                        </p>
+                                        <ul className="text-sm text-slate-500 space-y-2">
+                                            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check_circle</span> Detailed consultation & measurement</li>
+                                            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check_circle</span> Premium quality threads & lining</li>
+                                            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-sm">check_circle</span> Free minor alterations within 7 days</li>
+                                        </ul>
+                                    </div>
+
+                                    <button
+                                        onClick={() => {
+                                            document.body.style.overflow = ''; // Reset scroll just in case
+                                            navigate('/book', { state: { service_type: selectedService.title } })
+                                        }}
+                                        className="w-full btn-primary !bg-surface !text-primary hover:!bg-primary hover:!text-white !rounded-xl !py-4 flex justify-between items-center group transition-all duration-300 shadow-xl shadow-primary/20"
+                                    >
+                                        <span className="font-semibold text-lg drop-shadow-sm">Book This Service</span>
+                                        <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
 
